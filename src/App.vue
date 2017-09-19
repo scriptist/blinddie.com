@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <roll-configurer></roll-configurer>
-    <roll-button></roll-button>
-    <roll-result></roll-result>
+    <roll-configurer :dice.sync="dice" :sides.sync="sides" />
+    <roll-button @click="roll">Roll</roll-button>
+    <roll-result :result="result" :rolling="rolling" />
   </div>
 </template>
 
@@ -19,11 +19,21 @@ export default {
     RollResult,
   },
   data: () => ({
-    dice: 1,
+    dice: 2,
     sides: 20,
     rolling: false,
     result: null,
   }),
+  methods: {
+    roll() {
+      this.rolling = true;
+      this.result = [...new Array(this.dice)]
+        .map(() => Math.ceil(Math.random() * this.sides));
+      setTimeout(() => {
+        this.rolling = false;
+      }, 500);
+    },
+  },
 };
 </script>
 
