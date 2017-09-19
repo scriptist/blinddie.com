@@ -1,10 +1,17 @@
 <template>
-  <div>
-    Rolling
-    <input type="number" v-model="dice" />
-    dice with
-    <input type="number" v-model="sides" />
-    sides
+  <div class="root">
+    <div class="field">
+      <button @click="() => this.dice--">-</button>
+      <label for="dice">Dice</label>
+      <button @click="() => this.dice++">+</button>
+      <input type="number" id="dice" v-model="dice" />
+    </div>
+    <div class="field">
+      <button @click="() => this.sides--">-</button>
+      <label for="sides">Sides</label>
+      <button @click="() => this.sides++">+</button>
+      <input type="number" id="sides" v-model="sides" />
+    </div>
   </div>
 </template>
 
@@ -19,20 +26,12 @@ export default {
   },
   computed: {
     dice: {
-      get() {
-        return this.value.dice;
-      },
-      set(value) {
-        this.update({ dice: value });
-      },
+      get() { return this.value.dice; },
+      set(value) { this.update({ dice: value }); },
     },
     sides: {
-      get() {
-        return this.value.sides;
-      },
-      set(value) {
-        this.update({ sides: value });
-      },
+      get() { return this.value.sides; },
+      set(value) { this.update({ sides: value }); },
     },
   },
   methods: {
@@ -50,4 +49,7 @@ export default {
 </script>
 
 <style scoped>
+.root {
+  display: flex;
+}
 </style>
