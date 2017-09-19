@@ -19,10 +19,10 @@ button {
   border: none;
   border-bottom: 2px solid #327585;
   color: white;
-  font-size: 1.4em;
-  margin-top: 30px;
-  padding: 0.4em;
+  font-size: 1.6em;
+  letter-spacing: .05em;
+  padding: 1em;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, .4);
-  width: 80%;
+  width: 100%;
 }
 </style>

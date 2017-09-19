@@ -1,10 +1,13 @@
 <template>
   <div class="root">
-    <div v-if="rolling">Rolling...</div>
+    <div v-if="rolling" class="hint">Rolling...</div>
     <div v-else-if="result != null">
       <div class="die" v-for="number in result">
         {{number}}
       </div>
+    </div>
+    <div v-else class="hint">
+      Press "Roll" to start
     </div>
   </div>
 </template>
@@ -21,7 +24,11 @@ export default {
 
 <style scoped>
 .root {
-  margin-top: 40px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .die {
@@ -33,5 +40,9 @@ export default {
   line-height: 100px;
   margin: 20px;
   width: 100px;
+}
+
+.hint {
+  color: #ccc;
 }
 </style>

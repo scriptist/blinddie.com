@@ -51,7 +51,7 @@ export default {
 <style scoped>
 .root {
   display: flex;
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 label {

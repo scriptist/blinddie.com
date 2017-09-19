@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <roll-configurer v-model="config" />
-    <roll-button @click="roll">Roll</roll-button>
-    <roll-result :result="result" :rolling="rolling" />
+    <div class="result">
+      <roll-result :result="result" :rolling="rolling" />
+    </div>
+    <div class="config">
+      <roll-configurer v-model="config" />
+      <roll-button @click="roll">Roll</roll-button>
+    </div>
   </div>
 </template>
 
@@ -40,16 +44,33 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  margin: 0;
-}
-
 #app {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   color: #2c3e50;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;
+}
+
+.result,
+.config {
+  background: white;
+  left: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.result {
+  bottom: 12em;
+  overflow: auto;
+  top: 0;
+}
+
+.config {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  height: 12em;
+  justify-content: flex-end;
 }
 </style>
