@@ -1,18 +1,29 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <roll-configurer></roll-configurer>
+    <roll-button></roll-button>
+    <roll-result></roll-result>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import RollButton from './components/RollButton';
+import RollConfigurer from './components/RollConfigurer';
+import RollResult from './components/RollResult';
 
 export default {
   name: 'app',
   components: {
-    Hello,
+    RollButton,
+    RollConfigurer,
+    RollResult,
   },
+  data: () => ({
+    dice: 1,
+    sides: 20,
+    rolling: false,
+    result: null,
+  }),
 };
 </script>
 
