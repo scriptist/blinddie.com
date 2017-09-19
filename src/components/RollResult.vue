@@ -13,11 +13,21 @@
 </template>
 
 <script>
+import speak from '../lib/speak';
+
 export default {
   name: 'roll-result',
   props: {
     result: Array,
     rolling: Boolean,
+  },
+  watch: {
+    result(value) {
+      const s = value.length > 1
+        ? `${value.slice(0, -1).join(', ')}, and ${value[value.length - 1]}`
+        : value[value.length - 1];
+      speak(s);
+    },
   },
 };
 </script>
