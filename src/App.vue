@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <roll-configurer :dice.sync="dice" :sides.sync="sides" />
+    <roll-configurer v-model="config" />
     <roll-button @click="roll">Roll</roll-button>
     <roll-result :result="result" :rolling="rolling" />
   </div>
@@ -19,16 +19,18 @@ export default {
     RollResult,
   },
   data: () => ({
-    dice: 2,
-    sides: 20,
+    config: {
+      dice: 2,
+      sides: 20,
+    },
     rolling: false,
     result: null,
   }),
   methods: {
     roll() {
       this.rolling = true;
-      this.result = [...new Array(this.dice)]
-        .map(() => Math.ceil(Math.random() * this.sides));
+      this.result = [...new Array(this.config.dice)]
+        .map(() => Math.ceil(Math.random() * this.config.sides));
       setTimeout(() => {
         this.rolling = false;
       }, 500);

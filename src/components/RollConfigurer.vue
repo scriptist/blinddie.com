@@ -1,40 +1,49 @@
 <template>
   <div>
     Rolling
-    <number-input :value="dice" @input="updateDice" />
+    <input type="number" v-model="dice" />
     dice with
-    <number-input :value="sides" @input="updateSides" />
+    <input type="number" v-model="sides" />
     sides
   </div>
 </template>
 
 <script>
-import NumberInput from './NumberInput';
-
 export default {
   name: 'roll-configurer',
-  components: {
-    NumberInput,
-  },
   props: {
-    dice: {
-      type: Number,
+    value: {
+      type: Object,
       required: true,
     },
+  },
+  computed: {
+    dice: {
+      get() {
+        return this.value.dice;
+      },
+      set(value) {
+        this.update({ dice: value });
+      },
+    },
     sides: {
-      type: Number,
-      required: true,
+      get() {
+        return this.value.sides;
+      },
+      set(value) {
+        this.update({ sides: value });
+      },
     },
   },
   methods: {
     boundInteger(n, min, max) {
       return Math.max(min, Math.min(max, Math.round(n)));
     },
-    updateDice(value) {
-      this.$emit('update:dice', this.boundInteger(value, 1, 10));
-    },
-    updateSides(value) {
-      this.$emit('update:sides', this.boundInteger(value, 1, 1000));
+    update(changes) {
+      this.$emit('input', {
+        dice: this.boundInteger(changes.dice || this.dice, 1, 10),
+        sides: this.boundInteger(changes.sides || this.sides, 1, 1000),
+      });
     },
   },
 };
