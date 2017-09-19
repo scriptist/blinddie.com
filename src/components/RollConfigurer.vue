@@ -51,5 +51,36 @@ export default {
 <style scoped>
 .root {
   display: flex;
+  margin-top: 20px;
+}
+
+label {
+  color: #aaa;
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  vertical-align: .2em;
+}
+
+button {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1.5em;
+  height: 40px;
+  position: relative;
+  width: 40px;
+}
+
+input {
+  background: none;
+  border: none;
+  color: #444;
+  font-family: inherit;
+  font-size: 2em;
+  margin-top: -.25em;
+  text-align: center;
+  width: 3em;
 }
 </style>

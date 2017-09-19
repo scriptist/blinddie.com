@@ -40,6 +40,11 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  margin: 0;
+}
+
 #app {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
