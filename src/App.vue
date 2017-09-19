@@ -62,7 +62,8 @@ export default {
 
 .result {
   bottom: 12em;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   top: 0;
 }
 

@@ -51,7 +51,12 @@ export default {
 <style scoped>
 .root {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
+  justify-content: space-around;
+}
+
+.field {
+  width: 10em;
 }
 
 label {
@@ -67,10 +72,11 @@ button {
   background: none;
   border: none;
   color: #ccc;
+  cursor: pointer;
   font-size: 1.5em;
-  height: 40px;
+  height: 2em;
   position: relative;
-  width: 40px;
+  width: 2em;
 }
 
 input {
@@ -81,6 +87,6 @@ input {
   font-size: 2em;
   margin-top: -.25em;
   text-align: center;
-  width: 3em;
+  width: 80%;
 }
 </style>

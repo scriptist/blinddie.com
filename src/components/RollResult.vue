@@ -1,5 +1,8 @@
 <template>
   <div class="root">
+    <div v-if="!supported" class="warning">
+      Your browser does not support speech synthesis.
+    </div>
     <div v-if="rolling" class="hint">Rolling...</div>
     <div v-else-if="result != null">
       <div class="die" v-for="number in result">
@@ -13,7 +16,7 @@
 </template>
 
 <script>
-import speak from '../lib/speak';
+import Speech from '../lib/Speech';
 
 export default {
   name: 'roll-result',
@@ -21,12 +24,17 @@ export default {
     result: Array,
     rolling: Boolean,
   },
+  data() {
+    return {
+      supported: Speech.isSupported(),
+    };
+  },
   watch: {
     result(value) {
       const s = value.length > 1
         ? `${value.slice(0, -1).join(', ')}, and ${value[value.length - 1]}`
         : value[value.length - 1];
-      speak(s);
+      Speech.speak(s);
     },
   },
 };
@@ -39,6 +47,16 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.warning {
+  background: red;
+  color: white;
+  left: 0;
+  padding: 0.2em;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .die {

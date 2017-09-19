@@ -19,6 +19,7 @@ button {
   border: none;
   border-bottom: 2px solid #327585;
   color: white;
+  cursor: pointer;
   font-size: 1.6em;
   letter-spacing: .05em;
   padding: 1em;
