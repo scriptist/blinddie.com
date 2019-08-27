@@ -7,6 +7,11 @@
       <roll-configurer v-model="config" />
       <roll-button @click="roll">Roll</roll-button>
     </div>
+    <roll-sound
+      :result="rolling ? null : result"
+      :rolling="rolling"
+      :rollSound="config.rollSound"
+    />
   </div>
 </template>
 
@@ -14,6 +19,7 @@
 import RollButton from './components/RollButton';
 import RollConfigurer from './components/RollConfigurer';
 import RollResult from './components/RollResult';
+import RollSound from './components/RollSound';
 
 export default {
   name: 'app',
@@ -21,10 +27,12 @@ export default {
     RollButton,
     RollConfigurer,
     RollResult,
+    RollSound,
   },
   data: () => ({
     config: {
       dice: 2,
+      rollSound: true,
       sides: 20,
     },
     rolling: false,
@@ -33,11 +41,23 @@ export default {
   methods: {
     roll() {
       this.rolling = true;
-      this.result = [...new Array(this.config.dice)]
-        .map(() => Math.ceil(Math.random() * this.config.sides));
+      this.result = [...new Array(this.config.dice)].map(() =>
+        Math.ceil(Math.random() * this.config.sides),
+      );
       setTimeout(() => {
         this.rolling = false;
-      }, 500);
+      }, 800);
+
+      try {
+        window.ga('send', 'event', {
+          eventCategory: 'dice',
+          eventAction: 'roll',
+          eventLabel: this.result.join(', '),
+        });
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Google analytics failed to fire event');
+      }
     },
   },
 };

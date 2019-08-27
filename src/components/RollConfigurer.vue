@@ -2,16 +2,20 @@
   <div class="root">
     <div class="field">
       <button @click="() => this.dice--">-</button>
-      <label for="dice">Dice</label>
+      <label class="label" for="dice">Dice</label>
       <button @click="() => this.dice++">+</button>
       <input type="number" id="dice" v-model="dice" />
     </div>
     <div class="field">
       <button @click="() => this.sides--">-</button>
-      <label for="sides">Sides</label>
+      <label class="label" for="sides">Sides</label>
       <button @click="() => this.sides++">+</button>
       <input type="number" id="sides" v-model="sides" />
     </div>
+    <label class="field sound">
+      <div class="label">Scod Mode</div>
+      <input type="checkbox" id="rollSound" v-model="rollSound" />
+    </label>
   </div>
 </template>
 
@@ -26,12 +30,28 @@ export default {
   },
   computed: {
     dice: {
-      get() { return this.value.dice; },
-      set(value) { this.update({ dice: value }); },
+      get() {
+        return this.value.dice;
+      },
+      set(value) {
+        this.update({ dice: value });
+      },
+    },
+    rollSound: {
+      get() {
+        return this.value.rollSound;
+      },
+      set(value) {
+        this.update({ rollSound: value });
+      },
     },
     sides: {
-      get() { return this.value.sides; },
-      set(value) { this.update({ sides: value }); },
+      get() {
+        return this.value.sides;
+      },
+      set(value) {
+        this.update({ sides: value });
+      },
     },
   },
   methods: {
@@ -41,6 +61,7 @@ export default {
     update(changes) {
       this.$emit('input', {
         dice: this.boundInteger(changes.dice || this.dice, 1, 10),
+        rollSound: changes.rollSound == null ? this.rollSound === true : changes.rollSound === true,
         sides: this.boundInteger(changes.sides || this.sides, 1, 1000),
       });
     },
@@ -56,16 +77,18 @@ export default {
 }
 
 .field {
+  display: block;
   width: 10em;
 }
 
-label {
+.label {
   color: #aaa;
   font-size: 0.8em;
   font-weight: bold;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
+  line-height: 2rem;
   text-transform: uppercase;
-  vertical-align: .2em;
+  vertical-align: 0.2em;
 }
 
 button {
@@ -74,19 +97,39 @@ button {
   color: #ccc;
   cursor: pointer;
   font-size: 1.5em;
-  height: 2em;
+  height: 2rem;
   position: relative;
-  width: 2em;
+  width: 2rem;
 }
 
-input {
+input[type='number'] {
   background: none;
   border: none;
   color: #444;
   font-family: inherit;
-  font-size: 2em;
-  margin-top: -.25em;
+  font-size: 2rem;
+  margin-top: -0.25em;
   text-align: center;
   width: 80%;
+}
+
+input[type='checkbox'] {
+  display: block;
+  height: 1.5rem;
+  margin: 0 auto;
+  width: 1.5rem;
+}
+
+@media (max-width: 380px) {
+  .root {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .field {
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
 }
 </style>

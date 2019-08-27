@@ -8,6 +8,8 @@ export default {
       return;
     }
 
+    speechSynthesis.cancel();
+
     const utterance = new SpeechSynthesisUtterance(text);
     speechSynthesis.speak(utterance);
   },

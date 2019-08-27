@@ -1,12 +1,12 @@
 <template>
   <div class="root">
-    <div v-if="!supported" class="warning">
+    <div v-if="!speechSupported" class="warning">
       Your browser does not support speech synthesis.
     </div>
     <div v-if="rolling" class="hint">Rolling...</div>
     <div v-else-if="result != null">
       <div class="die" v-for="number in result">
-        {{number}}
+        {{ number }}
       </div>
     </div>
     <div v-else class="hint">
@@ -26,16 +26,8 @@ export default {
   },
   data() {
     return {
-      supported: Speech.isSupported(),
+      speechSupported: Speech.isSupported(),
     };
-  },
-  watch: {
-    result(value) {
-      const s = value.length > 1
-        ? `${value.slice(0, -1).join(', ')}, and ${value[value.length - 1]}`
-        : value[value.length - 1];
-      Speech.speak(s);
-    },
   },
 };
 </script>
